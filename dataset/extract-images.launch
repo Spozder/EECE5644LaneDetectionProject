@@ -1,0 +1,9 @@
+<launch>
+  <arg name="HOMEDIR"/>
+  <node pkg="rosbag" type="play" name="rosbag" required="true" args="$(arg HOMEDIR)/dataset/bags/current-bag.bag"/>
+  <node name="extract" pkg="image_view" type="extract_images" required="true" output="screen">
+    <remap from="image" to="camera_array/cam2/image_raw"/>
+    <param name="sec_per_frame" value="5"/>
+    <param name="filename_format" value="$(arg HOMEDIR)/dataset/images/frame%05d.jpg"/>
+  </node>
+</launch>
